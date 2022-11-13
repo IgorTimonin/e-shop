@@ -1,0 +1,170 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url(../src/Images/bernard-hermant-X-Bu9X6gok0-unsplash.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+a:hover {
+  opacity: 0.5;
+}
+
+nav {
+  padding: 0 1.5rem;
+}
+
+.white-text {
+  padding: 0 0 0 1.5rem;
+}
+
+.white-text:last-child {
+  padding: 0;
+}
+
+.content {
+  min-height: calc(100vh - 134px);
+  padding: 1.5rem 0 0 0;
+}
+
+.goods {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+}
+
+.card-image {
+  flex-grow: 1;
+  padding: 20px
+}
+
+.cart-quantity {
+  padding: 3px;
+  position: relative;
+  color: #fff;
+  top: -35px;
+  left: -50px;
+}
+
+.shopping-cart {
+  border: 3px #000 solid;
+  border-radius: 50%;
+  padding: 10px;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  
+}
+
+.cart {
+  margin: 3px;
+  position: fixed;
+  bottom: 30px;
+  right: 0;
+  z-index: 5;
+  cursor: pointer;
+}
+
+.cart:hover {
+  animation: scale 1s ease;
+}
+
+@keyframes scale {
+    from {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    to {
+        transform: scale(1);
+    }
+    }
+
+@media (min-width: 767px) {
+  .cart {
+    bottom: unset;
+  }
+}
+
+.basket-list {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50rem;
+  max-width: 95%;
+  background-color: white;
+  box-shadow: inset inset -1px 3px 8px 5px #191c1f, 2px 5px 16px 0 #0b325e,
+    5px 5px 15px 5px rgba(0, 0, 0, 0);
+  animation: show 500ms ease-in-out;
+}
+
+.basket-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.basket-delete {
+  cursor: pointer;
+}
+
+@keyframes show {
+  from {
+    top: 70%;
+    opacity: 0;
+  }
+  to {
+    top: 50%;
+    opacity: 1;
+  }
+}
+
+.basket-quantity {
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+#toast-container {
+  top: 3rem !important;
+  animation: fade-in 250ms ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(2rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0rem);
+  }
+}
+
+.btn-opacity:hover {
+  opacity: 0.8;
+}
+
+.icons-circle {
+  border: 1px solid #000;
+  border-radius: 50%;
+  margin: 0 10px;
+}
