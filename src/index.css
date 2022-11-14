@@ -144,14 +144,14 @@ nav {
 }
 
 #toast-container {
-  top: 3rem !important;
+  top: 1rem !important;
   animation: fade-in 250ms ease-in-out;
 }
 
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(2rem);
+    transform: translateY(1rem);
   }
   to {
     opacity: 1;

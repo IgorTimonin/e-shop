@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BasketItem } from './BasketItem';
 
 function BasketList(props) {
@@ -13,9 +14,25 @@ function BasketList(props) {
     return sum + el.price * el.quantity;
   }, 0);
 
+  const [purchase, setPurchase] = useState(false);
+
   function handlePurchase() {
-    
+    setPurchase(true);
   }
+
+  function handleBack() {
+    setPurchase(false);
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+  }
+
+  useEffect(() => {
+    if (totalPrice <= 0) {
+      setPurchase(false);
+    }
+  }, [totalPrice]);
 
   return (
     <div className='popup'>
@@ -37,17 +54,64 @@ function BasketList(props) {
         <li className='collection-item active grey darken-4'>
           Общая стоимость: {totalPrice} ₽{' '}
         </li>
-        <li className='collection-item center'>
-          <button
-            className='btn btn-opacity green accent-4'
-            onClick={handlePurchase}
-          >
-            Оформить заказ
-          </button>
-        </li>
-        <i className='material-icons basket-close' onClick={handleBasketShow}>
-          clear
-        </i>
+        {!purchase ? (
+          <>
+            <li className='collection-item center'>
+              <button
+                className='btn btn-opacity green accent-4'
+                onClick={handlePurchase}
+                disabled={!order.length}
+              >
+                Оформить заказ
+              </button>
+            </li>
+            <i
+              className='material-icons basket-close'
+              onClick={handleBasketShow}
+            >
+              clear
+            </i>
+          </>
+        ) : (
+          ''
+        )}
+        {purchase ? (
+          <div class='collection-item center row'>
+            <form class=' col s12' onSubmit={handleSubmit}>
+              <div class='row'>
+                <div class='input-field col s6'>
+                  <input
+                    placeholder='Имя'
+                    id='first_name'
+                    type='text'
+                    class='validate'
+                    required
+                  ></input>
+                </div>
+                <div class='input-field col s6'>
+                  <input
+                    placeholder='Телефон +7 123 456 78 99'
+                    id='first_name'
+                    type='text'
+                    class='validate'
+                    required
+                  ></input>
+                </div>
+              </div>
+              <button className='btn btn-opacity grey' onClick={handleBack}>
+                назад
+              </button>
+              <button
+                type='submit'
+                className='btn btn-opacity green accent-4 btn-submit'
+              >
+                завершить покупку
+              </button>
+            </form>
+          </div>
+        ) : (
+          ''
+        )}
       </ul>
     </div>
   );
