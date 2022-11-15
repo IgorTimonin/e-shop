@@ -163,6 +163,10 @@ nav {
   opacity: 0.8;
 }
 
+.btn-submit{
+  margin-left: 30px;
+}
+
 .icons-circle {
   border: 1px solid #000;
   border-radius: 50%;

@@ -1,8 +1,8 @@
 {
-  "name": "react-shop",
+  "name": "e-shop",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://ia-stepanov.github.io/react-shop",
+  "homepage": "",
   "dependencies": {
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
