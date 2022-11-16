@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { BasketItem } from './BasketItem';
 
 function BasketList(props) {
-  
   const {
     order = [],
     handleBasketShow = Function.prototype,
@@ -10,7 +9,8 @@ function BasketList(props) {
     incQuantity,
     decQuantity,
   } = props;
-
+  
+  /* eslint-disable */
   (function () {
     var PM_YM_COUNTER = (91204849, 'reachGoal', 'purchaseForm');
     var ee = setInterval(function () {
@@ -22,6 +22,7 @@ function BasketList(props) {
       }
     }, 500);
   })();
+  /* eslint-enable */
 
   const totalPrice = order.reduce((sum, el) => {
     return sum + el.price * el.quantity;
@@ -36,9 +37,9 @@ function BasketList(props) {
   function handleBack() {
     setPurchase(false);
   }
-const yMetrika = () => {
-  ym(91204849, 'reachGoal', 'purchaseForm');
-}
+  const yMetrika = () => {
+    ym(91204849, 'reachGoal', 'purchaseForm'); //eslint-disable-line
+  };
   function handleSubmit(e) {
     e.preventDefault();
     yMetrika();
