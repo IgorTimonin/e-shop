@@ -8,7 +8,8 @@ require 'phpmailer/Exception.php';
 $mail = new PHPMailer(true);
 $mail->CharSet = 'UTF-8';
 $mail->setLanguage('ru', 'phpmailer/language/');
-$mail->isSMTP();
+$mail->isHTML(true);
+// $mail->isSMTP();
 
 // $mail->SMTPAuth = true;
 // $mail->SMTPDebug = 0;
