@@ -9,7 +9,18 @@ function BasketList(props) {
     incQuantity,
     decQuantity,
   } = props;
-  
+
+  const [userName, setUserName] = useState('');
+  const [userPhone, setUserPhone] = useState('');
+
+  function handlerName(e) {
+    setUserName(e.target.value);
+  }
+
+  function handlerPhone(e) {
+    setUserPhone(e.target.value);
+  }
+
   /* eslint-disable */
   (function () {
     var PM_YM_COUNTER = (91204849, 'reachGoal', 'purchaseForm');
@@ -37,12 +48,30 @@ function BasketList(props) {
   function handleBack() {
     setPurchase(false);
   }
+
   const yMetrika = () => {
     ym(91204849, 'reachGoal', 'purchaseForm'); //eslint-disable-line
   };
+
+  async function formSend(data) {
+    let response = await fetch('sendmail.php', {
+      method: 'POST',
+      body: data,
+    });
+    if (response.ok) {
+      let result = await response.json();
+      console.log(result.message);
+    } else {
+      console.log('Ошибка')
+    }
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     yMetrika();
+
+    const Data = { name: userName, phone: userPhone, order };
+    formSend(Data);
   }
 
   useEffect(() => {
@@ -107,6 +136,8 @@ function BasketList(props) {
                       placeholder='Имя'
                       id='name'
                       type='text'
+                      value={userName}
+                      onChange={handlerName}
                       required
                     ></input>
                   </div>
@@ -116,6 +147,8 @@ function BasketList(props) {
                       id='phone'
                       type='text'
                       pattern='^\+?[78][- ]?(\(?\d{3}\)?)?[- ]?\d{3}[- ]?\d{2}[- ]?\d{2}$'
+                      value={userPhone}
+                      onChange={handlerPhone}
                       required
                     ></input>
                   </div>
