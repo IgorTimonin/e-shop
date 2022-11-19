@@ -1,7 +1,8 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-image: url(../src/Images/bernard-hermant-X-Bu9X6gok0-unsplash.jpg);
@@ -44,7 +45,7 @@ nav {
 
 .card-image {
   flex-grow: 1;
-  padding: 20px
+  padding: 20px;
 }
 
 .cart-quantity {
@@ -68,7 +69,6 @@ nav {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  
 }
 
 .cart {
@@ -85,16 +85,16 @@ nav {
 }
 
 @keyframes scale {
-    from {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-    to {
-        transform: scale(1);
-    }
-    }
+  from {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 
 @media (min-width: 767px) {
   .cart {
@@ -127,6 +127,20 @@ nav {
   cursor: pointer;
 }
 
+.basket-delete:hover {
+  color: #ef1010 !important;
+}
+
+.basket-quantity_inc:hover {
+  color: #00c853;
+  border-color: #00c853;
+}
+
+.basket-quantity_dec:hover {
+  color: #ef1010;
+  border-color: #ef1010;
+}
+
 @keyframes show {
   from {
     top: 70%;
@@ -143,18 +157,33 @@ nav {
   vertical-align: middle;
 }
 
+.toast {
+  margin: 0;
+  top: 0;
+}
+
 #toast-container {
-  top: 1rem !important;
-  animation: fade-in 250ms ease-in-out;
+  top: -3.5rem !important;
+  right: calc(50% - 87px);
+  animation: fade-in 1.5s ease-in-out;
 }
 
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(1rem);
+    transform: translateY(0rem);
+  }
+
+  25% {
+    opacity: 1;
+    transform: translateY(4rem);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(4rem);
   }
   to {
-    opacity: 1;
+    opacity: 0;
     transform: translateY(0rem);
   }
 }
@@ -163,7 +192,7 @@ nav {
   opacity: 0.8;
 }
 
-.btn-submit{
+.btn-submit {
   margin-left: 30px;
 }
 
@@ -171,4 +200,9 @@ nav {
   border: 1px solid #000;
   border-radius: 50%;
   margin: 0 10px;
+}
+
+.input {
+  font-size: 18px;
+  letter-spacing: 0.6px;
 }

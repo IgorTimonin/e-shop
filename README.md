@@ -10,7 +10,7 @@
 ## Установка и запуск приложения:
 Клонировать репозиторий:
 
-  git clone https://github.com/ia-stepanov/react-shop.git
+  git clone https://github.com/IgorTimonin/e-shop
 
 Установить зависимости:
 

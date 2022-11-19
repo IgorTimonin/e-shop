@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BasketItem } from './BasketItem';
+import { useForm, ValidationError } from '@formspree/react';
 
 function BasketList(props) {
   const {
@@ -10,18 +11,23 @@ function BasketList(props) {
     decQuantity,
   } = props;
 
-  const [userName, setUserName] = useState('');
-  const [userPhone, setUserPhone] = useState('');
+  const [purchase, setPurchase] = useState(false);
+  const totalPrice = order.reduce((sum, el) => {
+    return sum + el.price * el.quantity;
+  }, 0);
 
-  function handlerName(e) {
-    setUserName(e.target.value);
+  useEffect(() => {
+    if (totalPrice <= 0) {
+      setPurchase(false);
+    }
+  }, [totalPrice]);
+
+  const [state, handleSubmit] = useForm('mpznbvyq');
+  if (state.succeeded) {
+    return <p>Заказ оформлен. Спасибо за покупку.</p>;
   }
 
-  function handlerPhone(e) {
-    setUserPhone(e.target.value);
-  }
-
-  /* eslint-disable */
+  /* eslint-disable */ // отключение eslint для метрики
   (function () {
     var PM_YM_COUNTER = (91204849, 'reachGoal', 'purchaseForm');
     var ee = setInterval(function () {
@@ -33,52 +39,32 @@ function BasketList(props) {
       }
     }, 500);
   })();
+
+  const yMetrika = () => {
+    ym(91204849, 'reachGoal', 'purchaseForm');
+  };
   /* eslint-enable */
-
-  const totalPrice = order.reduce((sum, el) => {
-    return sum + el.price * el.quantity;
-  }, 0);
-
-  const [purchase, setPurchase] = useState(false);
 
   function handlePurchase() {
     setPurchase(true);
+    console.log(order);
   }
 
   function handleBack() {
     setPurchase(false);
   }
 
-  const yMetrika = () => {
-    ym(91204849, 'reachGoal', 'purchaseForm'); //eslint-disable-line
-  };
-
-  async function formSend(data) {
-    let response = await fetch('sendmail.php', {
-      method: 'POST',
-      body: data,
-    });
-    if (response.ok) {
-      let result = await response.json();
-      console.log(result.message);
-    } else {
-      console.log('Ошибка')
-    }
+  // оформление данных о заказе для добавления к форме
+  function goodsForn(item) {
+    return `Товар: ${item.name}: ${item.quantity} шт. цена: ${
+      item.price
+    } руб. / Сумма: ${item.price * item.quantity} руб.`;
   }
 
-  function handleSubmit(e) {
+  function handleFormSubmit(e) {
     e.preventDefault();
     yMetrika();
-
-    const Data = { name: userName, phone: userPhone, order };
-    formSend(Data);
   }
-
-  useEffect(() => {
-    if (totalPrice <= 0) {
-      setPurchase(false);
-    }
-  }, [totalPrice]);
 
   return (
     <>
@@ -101,6 +87,12 @@ function BasketList(props) {
           <li className='collection-item active grey darken-4'>
             Общая стоимость: {totalPrice} ₽{' '}
           </li>
+          <i
+            className='material-icons basket-close btn-opacity'
+            onClick={handleBasketShow}
+          >
+            clear
+          </i>
           {!purchase ? (
             <>
               <li className='collection-item center'>
@@ -112,12 +104,6 @@ function BasketList(props) {
                   Оформить заказ
                 </button>
               </li>
-              <i
-                className='material-icons basket-close'
-                onClick={handleBasketShow}
-              >
-                clear
-              </i>
             </>
           ) : (
             ''
@@ -125,6 +111,73 @@ function BasketList(props) {
           {purchase ? (
             <div className='collection-item center row'>
               <form
+                action='https://formspree.io/f/mpznbvyq'
+                method='POST'
+                // onSubmit={handleSubmit}
+                className='col s12'
+                id='purchaseForm'
+              >
+                <div className='row'>
+                  <div className='input-field col s6'>
+                    <input
+                      className='input'
+                      id='userName'
+                      type='text'
+                      name='Имя'
+                      placeholder='Имя'
+                      required
+                    />
+                    <ValidationError
+                      prefix='Name'
+                      field='userName'
+                      errors={state.errors}
+                    />
+                  </div>
+                  <div className='input-field col s6'>
+                    <input
+                      className='input'
+                      placeholder='Телефон: +71234567899'
+                      id='phone'
+                      type='text'
+                      name='телефон'
+                      required
+                    />
+                    <ValidationError
+                      prefix='Phone'
+                      field='phone'
+                      errors={state.errors}
+                    />
+                  </div>
+                  {order.map((item, i) => {
+                    console.log(item);
+                    return (
+                      <input
+                        id={`good-${i}`}
+                        type='hidden'
+                        name={`${i + 1}`}
+                        value={goodsForn(item)}
+                      />
+                    );
+                  })}
+                  <input
+                    id='total'
+                    type='hidden'
+                    name='Сумма заказа:'
+                    value={totalPrice}
+                  />
+                </div>
+                <button className='btn btn-opacity grey' onClick={handleBack}>
+                  назад
+                </button>
+                <button
+                  type='submit'
+                  disabled={state.submitting}
+                  className='btn btn-opacity green accent-4 btn-submit'
+                >
+                  завершить покупку
+                </button>
+              </form>
+              {/* <form
                 className='col s12'
                 id='purchaseForm'
                 method='POST'
@@ -162,7 +215,7 @@ function BasketList(props) {
                 >
                   завершить покупку
                 </button>
-              </form>
+              </form> */}
             </div>
           ) : (
             ''

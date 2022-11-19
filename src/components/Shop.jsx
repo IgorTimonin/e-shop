@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { GoodsList } from './GoodsList';
 import { Cart } from './Cart';
 import { BasketList } from './BasketList';
 import { Alert } from './Alert';
 
 function Shop() {
-  const [goods, setGoods] = useState([]);
+  // const [goods, setGoods] = useState([]);
   const [order, setOrder] = useState([]);
   const [isBasketShow, setBasketShow] = useState(false);
   const [alertName, setAlertName] = useState('');
   const addToBasket = (item) => {
-  const itemIndex = order.findIndex((orderItem) => orderItem.id === item.id);
+    const itemIndex = order.findIndex((orderItem) => orderItem.id === item.id);
 
     if (itemIndex < 0) {
       const newItem = {
@@ -73,17 +73,16 @@ function Shop() {
     setBasketShow(!isBasketShow);
   };
 
-  useEffect(function getGoods() {
-    
-  }, []);
-
   const closeAlert = () => {
     setAlertName('');
   };
 
   return (
-    <main className="container content">
-      <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
+    <main className='container content'>
+      <Cart
+        quantity={order.length}
+        handleBasketShow={handleBasketShow}
+      />
       <GoodsList addToBasket={addToBasket} />
       {isBasketShow && (
         <BasketList

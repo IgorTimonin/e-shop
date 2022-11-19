@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "",
   "dependencies": {
+    "@emailjs/browser": "^3.9.1",
+    "@formspree/react": "^2.4.1",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
