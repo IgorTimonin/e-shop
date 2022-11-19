@@ -5,10 +5,17 @@ import { BasketList } from './BasketList';
 import { Alert } from './Alert';
 
 function Shop() {
-  // const [goods, setGoods] = useState([]);
   const [order, setOrder] = useState([]);
   const [isBasketShow, setBasketShow] = useState(false);
   const [alertName, setAlertName] = useState('');
+  const [inCart, setInCart] = useState(false);
+
+  function alertTimer(name) {
+    setAlertName(name);
+    setTimeout(() => setAlertName(''), 1000);
+  }
+
+  //добавление выбранного товара в корзину
   const addToBasket = (item) => {
     const itemIndex = order.findIndex((orderItem) => orderItem.id === item.id);
 
@@ -31,14 +38,16 @@ function Shop() {
       });
       setOrder(newOrder);
     }
-    setAlertName(item.name);
+    alertTimer(item.name);
   };
 
+  //удаление товара из корзины
   const removeFromBasket = (itemId) => {
     const newOrder = order.filter((el) => el.id !== itemId);
     setOrder(newOrder);
   };
 
+  //увеличение кол-ва товаров в корзине
   const incQuantity = (itemId) => {
     const newOrder = order.map((el) => {
       if (el.id === itemId) {
@@ -54,6 +63,7 @@ function Shop() {
     setOrder(newOrder);
   };
 
+  //уменьшение кол-ва товаров в корзине
   const decQuantity = (itemId) => {
     const newOrder = order.map((el) => {
       if (el.id === itemId) {
@@ -68,7 +78,8 @@ function Shop() {
     });
     setOrder(newOrder);
   };
-
+  
+  //показ корзины
   const handleBasketShow = () => {
     setBasketShow(!isBasketShow);
   };
@@ -79,11 +90,13 @@ function Shop() {
 
   return (
     <main className='container content'>
-      <Cart
-        quantity={order.length}
-        handleBasketShow={handleBasketShow}
+      <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
+      <GoodsList
+        addToBasket={addToBasket}
+        inCart={inCart}
+        setInCart={setInCart}
+        order={order}
       />
-      <GoodsList addToBasket={addToBasket} />
       {isBasketShow && (
         <BasketList
           order={order}
@@ -93,7 +106,7 @@ function Shop() {
           decQuantity={decQuantity}
         />
       )}
-      {alertName && <Alert name={alertName} closeAlert={closeAlert} />}
+      {alertName && <Alert name={alertName}/>}
     </main>
   );
 }

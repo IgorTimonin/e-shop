@@ -165,7 +165,7 @@ nav {
 #toast-container {
   top: -3.5rem !important;
   right: calc(50% - 87px);
-  animation: fade-in 1.5s ease-in-out;
+  animation: fade-in 1s ease-in-out;
 }
 
 @keyframes fade-in {
@@ -205,4 +205,8 @@ nav {
 .input {
   font-size: 18px;
   letter-spacing: 0.6px;
+}
+
+.btn-buy {
+  min-width: 110px;
 }

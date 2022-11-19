@@ -1,8 +1,45 @@
 import { useState } from "react";
 
 function GoodsItem(props) {
-  const { id, name, description, price, image, addToBasket } = props;
+  const {
+    id,
+    name,
+    description,
+    price,
+    image,
+    addToBasket,
+    // inCart,
+    // setInCart,
+    // order,
+  } = props;
+
   const [inCart, setInCart] = useState(false);
+
+  function buyHandler() {
+    addToBasket({
+      id,
+      name,
+      price,
+    });
+    setInCart(!inCart);
+  }
+
+  // function clickHandler(el) {
+  //   buyHandler();
+  //   el.classList.toggle('active');
+  //   console.log(el);
+  // }
+
+  // function orderScanner(e) {
+  //   const id = e.current.target.id
+  //   if (Object.values(order).includes(id)) {
+  //     setInCart(true);
+  //   };
+  // }
+
+  // useEffect(() => {
+
+  // }, [order.length]);
 
   return (
     <div className='card'>
@@ -15,14 +52,11 @@ function GoodsItem(props) {
       </div>
       <div className='card-action'>
         <button
-          className='btn green accent-4 btn-opacity'
-          onClick={() =>
-            addToBasket({
-              id,
-              name,
-              price,
-            })
-          }
+          className={`btn btn-buy green accent-4 btn-opacity ${
+            inCart ? 'btn-active' : ''
+          }`}
+          onClick={buyHandler}
+          // {({ target }) => clickHandler(target)}
         >
           {inCart ? 'В корзине' : 'Купить'}
         </button>
