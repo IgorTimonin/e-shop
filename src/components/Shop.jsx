@@ -94,12 +94,16 @@ function Shop() {
 
   return (
     <main className='container content'>
-      <Cart quantity={order.length ? orderQty(order) : ''} handleBasketShow={handleBasketShow} />
+      <Cart
+        quantity={order.length ? orderQty(order) : ''}
+        handleBasketShow={handleBasketShow}
+      />
       <GoodsList
         addToBasket={addToBasket}
         inCart={inCart}
         setInCart={setInCart}
         order={order}
+        handleBasketShow={handleBasketShow}
       />
       {isBasketShow && (
         <BasketList

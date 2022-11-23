@@ -210,3 +210,8 @@ nav {
 .btn-buy {
   min-width: 110px;
 }
+
+.btn-buy:disabled {
+  background-color: #dff92a !important;
+  color: #000 !important;
+}

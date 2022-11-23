@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function GoodsItem(props) {
   const {
@@ -7,10 +7,9 @@ function GoodsItem(props) {
     description,
     price,
     image,
+    order,
     addToBasket,
-    // inCart,
-    // setInCart,
-    // order,
+    handleBasketShow
   } = props;
 
   const [inCart, setInCart] = useState(false);
@@ -21,25 +20,12 @@ function GoodsItem(props) {
       name,
       price,
     });
-    setInCart(!inCart);
+    setInCart(true);
   }
 
-  // function clickHandler(el) {
-  //   buyHandler();
-  //   el.classList.toggle('active');
-  //   console.log(el);
-  // }
-
-  // function orderScanner(e) {
-  //   const id = e.current.target.id
-  //   if (Object.values(order).includes(id)) {
-  //     setInCart(true);
-  //   };
-  // }
-
-  // useEffect(() => {
-
-  // }, [order.length]);
+  useEffect(() => {
+    order.findIndex(() => {})
+  }, [order]);
 
   return (
     <div className='card'>
@@ -53,10 +39,10 @@ function GoodsItem(props) {
       <div className='card-action'>
         <button
           className={`btn btn-buy green accent-4 btn-opacity ${
-            inCart ? 'btn-active' : ''
+            inCart && 'btn-active'
           }`}
-          onClick={buyHandler}
-          // {({ target }) => clickHandler(target)}
+          // disabled={inCart}
+          onClick={!inCart ? buyHandler : handleBasketShow}
         >
           {inCart ? 'В корзине' : 'Купить'}
         </button>

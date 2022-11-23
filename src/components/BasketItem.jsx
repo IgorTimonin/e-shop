@@ -9,6 +9,7 @@ function BasketItem(props) {
     decQuantity = Function.protype,
   } = props;
 
+  //удаляем товар из корзины если его становиться < 1 шт
   const qtyHandler = (id) => {
     quantity > 1 ? decQuantity(id) : removeFromBasket(id);
   }

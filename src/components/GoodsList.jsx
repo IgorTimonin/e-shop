@@ -17,6 +17,7 @@ function GoodsList(props) {
           inCart={props.inCart}
           setInCart={props.setInCart}
           order={props.order}
+          handleBasketShow={props.handleBasketShow}
         />
       ))}
     </div>
