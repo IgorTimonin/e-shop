@@ -22,12 +22,13 @@ function BasketList(props) {
     }
   }, [totalPrice]);
 
+  //Подключение formspree для отправки формы
   const [state, handleSubmit] = useForm('mpznbvyq');
   if (state.succeeded) {
     return <p>Заказ оформлен. Спасибо за покупку.</p>;
   }
 
-  /* eslint-disable */ // отключение eslint для метрики
+  /* eslint-disable */ // отключение eslint для Yandex метрики
   (function () {
     var PM_YM_COUNTER = (91204849, 'reachGoal', 'purchaseForm');
     var ee = setInterval(function () {
@@ -47,24 +48,23 @@ function BasketList(props) {
 
   function handlePurchase() {
     setPurchase(true);
-    console.log(order);
   }
 
   function handleBack() {
     setPurchase(false);
   }
 
-  // оформление данных о заказе для добавления к форме
-  function goodsForn(item) {
+  // добавления к форме данных о заказаных товарах
+  function goodsForm(item) {
     return `Товар: ${item.name}: ${item.quantity} шт. цена: ${
       item.price
     } руб. / Сумма: ${item.price * item.quantity} руб.`;
   }
 
-  function handleFormSubmit(e) {
-    e.preventDefault();
-    yMetrika();
-  }
+  // function handleFormSubmit(e) {
+  //   e.preventDefault();
+  //   yMetrika();
+  // }
 
   return (
     <>
@@ -155,7 +155,7 @@ function BasketList(props) {
                         id={`good-${i}`}
                         type='hidden'
                         name={`${i + 1}`}
-                        value={goodsForn(item)}
+                        value={goodsForm(item)}
                       />
                     );
                   })}

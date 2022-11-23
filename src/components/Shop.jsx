@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GoodsList } from './GoodsList';
 import { Cart } from './Cart';
 import { BasketList } from './BasketList';
@@ -61,6 +61,7 @@ function Shop() {
       }
     });
     setOrder(newOrder);
+    console.log(order);
   };
 
   //уменьшение кол-ва товаров в корзине
@@ -78,19 +79,23 @@ function Shop() {
     });
     setOrder(newOrder);
   };
-  
-  //показ корзины
+
+  //подсчёт товаров в корзине
+  function orderQty(arr) {
+    let resultQty = arr.reduce((sum, item) => {
+      return sum + item.quantity;
+    }, 0);
+    return resultQty;
+  }
+
+  //показ кол-ва товаров в карзине
   const handleBasketShow = () => {
     setBasketShow(!isBasketShow);
   };
 
-  const closeAlert = () => {
-    setAlertName('');
-  };
-
   return (
     <main className='container content'>
-      <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
+      <Cart quantity={order.length ? orderQty(order) : ''} handleBasketShow={handleBasketShow} />
       <GoodsList
         addToBasket={addToBasket}
         inCart={inCart}
@@ -106,7 +111,7 @@ function Shop() {
           decQuantity={decQuantity}
         />
       )}
-      {alertName && <Alert name={alertName}/>}
+      {alertName && <Alert name={alertName} />}
     </main>
   );
 }
