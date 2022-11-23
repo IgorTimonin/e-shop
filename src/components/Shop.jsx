@@ -61,7 +61,6 @@ function Shop() {
       }
     });
     setOrder(newOrder);
-    console.log(order);
   };
 
   //уменьшение кол-ва товаров в корзине

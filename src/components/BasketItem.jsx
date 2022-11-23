@@ -9,12 +9,16 @@ function BasketItem(props) {
     decQuantity = Function.protype,
   } = props;
 
+  const qtyHandler = (id) => {
+    quantity > 1 ? decQuantity(id) : removeFromBasket(id);
+  }
+
   return (
     <li className='collection-item'>
       {name}{' '}
       <i
         className='material-icons icons-circle basket-quantity basket-quantity_dec btn-opacity '
-        onClick={() => decQuantity(id)}
+        onClick={() => qtyHandler(id)}
       >
         remove
       </i>{' '}
