@@ -9,7 +9,7 @@ function GoodsItem(props) {
     image,
     order,
     addToBasket,
-    handleBasketShow
+    handleBasketShow,
   } = props;
 
   const [inCart, setInCart] = useState(false);
@@ -20,11 +20,11 @@ function GoodsItem(props) {
       name,
       price,
     });
-    setInCart(true);
   }
 
+  // проверка есть ли товар в корзине для изменения кнопки 'купить'
   useEffect(() => {
-    order.findIndex(() => {})
+    order.find((el) => el.id === id) ? setInCart(true) : setInCart(false);
   }, [order]);
 
   return (
@@ -39,9 +39,9 @@ function GoodsItem(props) {
       <div className='card-action'>
         <button
           className={`btn btn-buy green accent-4 btn-opacity ${
-            inCart && 'btn-active'
+            inCart ? 'btn-active' : ''
           }`}
-          // disabled={inCart}
+          disabled={inCart}
           onClick={!inCart ? buyHandler : handleBasketShow}
         >
           {inCart ? 'В корзине' : 'Купить'}

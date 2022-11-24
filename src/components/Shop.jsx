@@ -79,13 +79,13 @@ function Shop() {
     setOrder(newOrder);
   };
 
-  //подсчёт товаров в корзине
-  function orderQty(arr) {
-    let resultQty = arr.reduce((sum, item) => {
-      return sum + item.quantity;
-    }, 0);
-    return resultQty;
-  }
+  // //подсчёт товаров в корзине
+  // function orderQty(arr) {
+  //   let resultQty = arr.reduce((sum, item) => {
+  //     return sum + item.quantity;
+  //   }, 0);
+  //   return resultQty;
+  // }
 
   //показ кол-ва товаров в карзине
   const handleBasketShow = () => {
@@ -95,7 +95,7 @@ function Shop() {
   return (
     <main className='container content'>
       <Cart
-        quantity={order.length ? orderQty(order) : ''}
+        quantity={order.length}
         handleBasketShow={handleBasketShow}
       />
       <GoodsList
